@@ -32,29 +32,34 @@
         Code Used
       </h3>
       <pre class="brush: js">
+        var $modal = $('<div>This is my modal.</div>')
+          .attr('id', 'modal')
+          .css({
+            background: '#fff',
+          zIndex: 3000,
+          padding: '10px',
+          width: '640px',
+          height: '240px',
+          margin: '0 auto',
+          opacity: 1,
+          position: 'absolute',
+          top: '10%',
+          left: '10%'
+        });
+        
         $('#modal-trigger').click(function(evt) {
           evt.preventDefault();
           $(this).overlay({
             effect: 'fade',
             opacity: 0.8,
+            closeOnClick: true,
             onShow: function() {
-              $('body').append(
-                $('<div id="modal">This is my modal. Click to close it.</div>')
-                  .css({
-                    background: '#fff',
-                    zIndex: 3000,
-                    padding: '10px',
-                    width: '640px',
-                    height: '240px',
-                    margin: '0 auto',
-                    opacity: 1,
-                    position: 'absolute',
-                    top: '10%',
-                    left: '10%'
-                  });
-              );
-            }
-          });
+              $('body').append($modal);
+            },
+            onHide: function() {
+              $modal.remove();
+            },
+          })
         });
       </pre>
       <h2>
