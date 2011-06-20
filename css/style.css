@@ -1,0 +1,8 @@
+body { font-family: Arial, Sans-serif; }
+
+h1 { font-size: 24px; font-weight: bold; }
+p { margin: 10px 0 10px 0; }
+ul li { margin: 0 0 0 25px; list-style-type: disc; }
+
+#container { padding: 10px; }
+#small-container { width:640px; height: 380px; border: 1px solid #000; }
