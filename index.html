@@ -5,62 +5,131 @@
     <link rel="stylesheet" href="css/style.css" /> 
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
 		<script type="text/javascript" src="js/jquery.overlay.js"></script>
+    <script type="text/javascript" src="js/site.js"></script>
 		<title>Simple Overlay Demo</title>
 	</head>
 	<body>
     <div id="container">
       <h1>Simple Overlay Demo</h1>
       <p>
-        You can trigger overlays by applying it to any HTML element by 
-        calling it on any element.
+        Simple Overlay can be used in a variety of different ways. Some examples of how to use the plugin are below. All code used is below.
+      </p>
+      <h2>
+        Using Any Element
+      </h2>
+      <p id="paragraph-trigger">
+        You can trigger the overlay using any element (such as paragraph elements). Click on this sentence for a demo.
+        Click on the overlay to close it.
       </p>
       <p>
-        This includes <a href="http://google.com">anchors</a>, <span>spans</span>,
-        <ul>
-          <li>List items</li>
-        </ul>
+        You can trigger overlays by applying it to any HTML element by calling it on any element.
+      </p>
+      <h3>
+        Code Used
+      </h3>
+      <pre class="brush: js">
+        $('#paragraph-trigger').click(function() {
+          $(this).overlay({
+            closeOnClick: true
+          });
+        });
+      </pre>
+      <h2>
+        Using an Anchor
+      </h2>
+      <p>
+        You can display overlays by also using anchor elements. It's helpful to <a href="http://api.jquery.com/event.preventDefault/">prevent the default action</a> 
+        from occuring before displaying the overlay. Click on <a id="anchor-trigger" href="javascript:;">this anchor</a> for a demo. The gloss effect was achieved by passing 
+        <code>glossy: true</code> to the plugin options.
+      </p>
+      <h3>
+        Code Used
+      </h3>
+      <pre class="brush: js">
+        $('#anchor-trigger').click(function(evt) {
+          evt.preventDefault();
+          $(this).overlay({
+            color: 'red',
+            closeOnClick: true,
+            glossy: true
+          });
+        }); 
+      </pre>
+      <h2>
+        Callbacks
+      </h2>
+      <p>
+        The plugin supports the use of callbacks for both when it is displayed and when it is hidden. This allows you to take action after the overlay fires.
+        Examples would be displaying a custom message, modal dialog, or another prompt.
       </p>
       <p>
-        And paragraph elements.
+        For a trivial example, click <a id="modal-trigger" href="javascript:;">here</a>. This will add simple modal to the page once the overlay has been displayed.
       </p>
-      <div id="small-container">
-        You can even apply it to smaller elements.
+      <h3>
+        Code Used
+      </h3>
+      <pre class="brush: js">
+        $('#modal-trigger').click(function(evt) {
+          evt.preventDefault();
+          $(this).overlay({
+            effect: 'fade',
+            opacity: 0.8,
+            onShow: function() {
+              $('body').append(
+                $('<div id="modal">This is my modal. Click to close it.</div>')
+                  .css({
+                    background: '#fff',
+                    zIndex: 3000,
+                    padding: '10px',
+                    width: '640px',
+                    height: '240px',
+                    margin: '0 auto',
+                    opacity: 1,
+                    position: 'absolute',
+                    top: '10%',
+                    left: '10%'
+                  }).click(function() {
+                    $(this).remove();
+                    $('.overlay:first').fadeOut('fast', function() {
+                      $(this).remove();
+                    });
+                  })
+              );
+            }
+          });
+        });
+      </pre>
+      <h2>
+        Photo Overlay
+      </h2>
+      <p>
+        You can also provide an overlay on top of an image. Click on the photo below and notice the overlay come down. Using the onShow callback, you can wire up
+        an (h/t to <a href="http://twitter.com/alex_morrison">@Alex_Morrison</a> for this suggested use :) event handler to prevent right-clicking.
+      </p>
+      <div id="photo-trigger" style="width:720px;height: 478px;">
+        <img src="http://a3.sphotos.ak.fbcdn.net/hphotos-ak-snc6/259966_10100500093774910_4902926_62592512_5420140_n.jpg" alt="" />
       </div>
+      <h3>
+        Code Used
+      </h3>
+      <pre class="brush: js">
+        $('#photo-trigger').click(function() {
+          $(this).overlay({
+            color: '#ccc',
+            effect: 'fade',
+            glossy: true,
+            container: '#photo-trigger',
+            onShow: function() {
+              $(this).click(function(evt) {
+                evt.preventDefault();
+              }).bind('contextmenu', function(evt) {
+                evt.preventDefault();
+              });
+            }
+          });
+        });
+      </pre>
     </div>
-  <script type="text/javascript">
-  
-  $('a').click(function(evt) {
-    evt.preventDefault();
-    $(this).overlay({
-      color: 'red',
-      closeOnClick: true,
-      onHide: function() {
-        alert('Hidden');
-      },
-      glossy: true,
-      preventDefault: true
-    });
-  });  
-  
-  $('h1').click(function() {
-    $(this).overlay({
-      effect: 'slide',
-      color: 'black',
-      closeOnClick: true
-    });
-  });
-  
-  $('p:first').click(function() {
-    $(this).overlay({
-      effect: 'fade',
-      color: 'blue',
-      closeOnClick: true,
-      glossy: true,
-      container: '#small-container'
-    });
-  });
-  
-  </script>
 	</body>
 </html>
 	
