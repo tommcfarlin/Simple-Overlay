@@ -43,7 +43,7 @@
       .css({
         background: opts.color,
         opacity: opts.opacity,
-        top: $(opts.container).offset().top,
+        top: opts.container.toString() === 'body' ? $(opts.container).scrollTop() : $(opts.container).offset().top,
         left: $(opts.container).offset().left,
         width: opts.container === 'body' ? '100%' : $(opts.container).width(),
         height: opts.container === 'body' ? '100%' : $(opts.container).height(),
@@ -113,14 +113,14 @@
         
       case 'fade':
         $(overlay).fadeOut('fast', function() {
-          opts.onHide
+          opts.onHide();
           $(this).remove();
         });
         break;
             
       case 'slide':
         $(overlay).slideUp('fast', function() {
-          opts.onHide
+          opts.onHide();
           $(this).remove();
         });
         break;

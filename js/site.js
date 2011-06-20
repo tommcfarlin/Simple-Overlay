@@ -1,9 +1,41 @@
 $(function() {
   
+  SyntaxHighlighter.all();
+  
   $('#paragraph-trigger').click(function() {
     $(this).overlay({
       closeOnClick: true
     });
+  });
+  
+  var $modal = $('<div>This is my modal.</div>')
+    .attr('id', 'modal')
+    .css({
+      background: '#fff',
+    zIndex: 3000,
+    padding: '10px',
+    width: '640px',
+    height: '240px',
+    margin: '0 auto',
+    opacity: 1,
+    position: 'absolute',
+    top: '10%',
+    left: '10%'
+  });
+  
+  $('#modal-trigger').click(function(evt) {
+    evt.preventDefault();
+    $(this).overlay({
+      effect: 'fade',
+      opacity: 0.8,
+      closeOnClick: true,
+      onShow: function() {
+        $('body').append($modal);
+      },
+      onHide: function() {
+        $modal.remove();
+      },
+    })
   });
   
   $('#anchor-trigger').click(function(evt) {
@@ -14,36 +46,7 @@ $(function() {
       glossy: true
     });
   });  
-  
-  $('#modal-trigger').click(function(evt) {
-    evt.preventDefault();
-    $(this).overlay({
-      effect: 'fade',
-      opacity: 0.8,
-      onShow: function() {
-        $('body').append(
-          $('<div id="modal">This is my modal. Click to close it.</div>')
-            .css({
-              background: '#fff',
-              zIndex: 3000,
-              padding: '10px',
-              width: '640px',
-              height: '240px',
-              margin: '0 auto',
-              opacity: 1,
-              position: 'absolute',
-              top: '10%',
-              left: '10%'
-            }).click(function() {
-              $(this).remove();
-              $('.overlay:first').fadeOut('fast', function() {
-                $(this).remove();
-              });
-            })
-        );
-      }
-    });
-  });
+
   $('#photo-trigger').click(function() {
     $(this).overlay({
       color: '#ccc',
