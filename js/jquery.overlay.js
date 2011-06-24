@@ -6,7 +6,7 @@
  * Copyright 2011 Tom McFarlin, http://tommcfarlin.com, @moretom
  * Released under the MIT License
  *
- * http://moreco.de/jquery-simple-overlay
+ * http://moreco.de/simple-overlay
  */
 
 (function($) {
@@ -38,12 +38,19 @@
     $src.addClass('overlay-trigger');
   
     // create the overlay and add it to the dom
+    var iTop = 0;
+    if($.browser.mozilla && opts.container.toString() === 'body') { 
+      iTop = $('html').scrollTop();
+    } else {
+      iTop = $(opts.container).scrollTop();
+    } // end if/else
+    
     var overlay = $('<div></div>')
       .addClass('overlay')
       .css({
         background: opts.color,
         opacity: opts.opacity,
-        top: opts.container.toString() === 'body' ? $(opts.container).scrollTop() : $(opts.container).offset().top,
+        top: opts.container.toString() === 'body' ? iTop : $(opts.container).offset().top,
         left: $(opts.container).offset().left,
         width: opts.container === 'body' ? '100%' : $(opts.container).width(),
         height: opts.container === 'body' ? '100%' : $(opts.container).height(),
