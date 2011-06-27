@@ -1,0 +1,5 @@
+= 6/27 =
+* Fixing a problem with the onHide() callback
+
+= 6/24 = 
+* Addressing a problem with Firefox 4 positioning

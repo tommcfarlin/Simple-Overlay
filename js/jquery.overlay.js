@@ -120,14 +120,18 @@
         
       case 'fade':
         $(overlay).fadeOut('fast', function() {
-          opts.onHide();
+          if(opts.onHide) {
+            opts.onHide();
+          }
           $(this).remove();
         });
         break;
             
       case 'slide':
         $(overlay).slideUp('fast', function() {
-          opts.onHide();
+          if(opts.onHide) {
+            opts.onHide();
+          }
           $(this).remove();
         });
         break;
