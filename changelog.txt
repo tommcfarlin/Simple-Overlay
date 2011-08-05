@@ -1,3 +1,7 @@
+= 8/5 =
+* [ Issue 1 ] Overlays now correct position themselves in relatively positioned elements.
+* Updating the minified build
+
 = 6/27 =
 * Fixing a problem with the onHide() callback
 

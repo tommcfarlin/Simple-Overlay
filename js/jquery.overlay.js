@@ -82,7 +82,6 @@
     
     } // end if/else
     
-    
 
     // if specified, apply the gloss
     if(opts.glossy) {
