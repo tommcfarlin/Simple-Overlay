@@ -45,20 +45,44 @@
       iTop = $(opts.container).scrollTop();
     } // end if/else
     
-    var overlay = $('<div></div>')
-      .addClass('overlay')
-      .css({
-        background: opts.color,
-        opacity: opts.opacity,
-        top: opts.container.toString() === 'body' ? iTop : $(opts.container).offset().top,
-        left: $(opts.container).offset().left,
-        width: opts.container === 'body' ? '100%' : $(opts.container).width(),
-        height: opts.container === 'body' ? '100%' : $(opts.container).height(),
-        position: 'absolute',
-        zIndex: 1000,
-        display: 'none',
-        overflow: 'hidden'
-      });
+    var overlay = null;
+    if($src.css('position') === 'relative') {
+    
+    	overlay = $('<div></div>')
+    	.addClass('overlay')
+	      .css({
+	        background: opts.color,
+	        opacity: opts.opacity,
+	        top: $src.offset().top,
+	        left: $src.offset().left,
+	        width: $src.width(),
+	        height: $src.height(),
+	        position: 'absolute',
+	        zIndex: 1000,
+	        display: 'none',
+	        overflow: 'hidden'
+	      });
+    
+    } else {
+    
+	    overlay = $('<div></div>')
+	      .addClass('overlay')
+	      .css({
+	        background: opts.color,
+	        opacity: opts.opacity,
+	        top: opts.container.toString() === 'body' ? iTop : $(opts.container).offset().top,
+	        left: $(opts.container).offset().left,
+	        width: opts.container === 'body' ? '100%' : $(opts.container).width(),
+	        height: opts.container === 'body' ? '100%' : $(opts.container).height(),
+	        position: 'absolute',
+	        zIndex: 1000,
+	        display: 'none',
+	        overflow: 'hidden'
+	      });
+    
+    } // end if/else
+    
+    
 
     // if specified, apply the gloss
     if(opts.glossy) {
