@@ -8,3 +8,5 @@ ul li { margin: 0 0 0 25px; list-style-type: disc; }
 
 #container { padding: 10px; }
 #small-container { width:640px; height: 380px; border: 1px solid #000; }
+
+.ui-widget-overlay { background: #666666 url(../images/08_diagonals_thick.png) 50% 50% repeat; opacity: .50;filter:Alpha(Opacity=50); }

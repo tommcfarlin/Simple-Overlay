@@ -133,6 +133,27 @@
           });
         });
       </pre>
+      <h2>
+        Customer Overlay Class
+      </h2>
+      <p>
+        You can also used an overlay class already defined in your app from another library (i.e. jQuery UI). Click on the photo below to see the overlay class form jQuery UI used.
+      </p>
+      <div id="photo-trigger-2" style="width:720px;height: 478px;">
+        <img src="http://a3.sphotos.ak.fbcdn.net/hphotos-ak-snc6/259966_10100500093774910_4902926_62592512_5420140_n.jpg" alt="" />
+      </div>
+      <h3>
+        Code Used
+      </h3>
+      <pre class="brush: js">
+		  $('#photo-trigger-2').click(function() {
+		    $(this).overlay({
+		      overlayClass: 'ui-widget-overlay',
+		      effect: 'fade',
+		      container: '#photo-trigger-2'
+		    });
+		  });
+      </pre>
     </div>
 	</body>
 </html>

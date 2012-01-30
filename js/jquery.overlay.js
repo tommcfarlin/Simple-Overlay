@@ -14,6 +14,12 @@
 	$.fn.overlay = function(options) {
 
     var opts = $.extend({}, $.fn.overlay.defaults, options);
+	// If overlayClass is defined we don't want to use opts.color since it will override 
+	// the background from the element.
+	if( opts.overlayClass ) {
+		delete opts.color;
+	}
+	
 		return this.each(function(evt) {
       if(!$(this).hasClass('overlay-trigger')) {
         show(create($(this), opts), opts);
@@ -49,7 +55,7 @@
     if($src.css('position') === 'relative') {
     
     	overlay = $('<div></div>')
-    	.addClass('overlay')
+    	  .addClass(opts.overlayClass)
 	      .css({
 	        background: opts.color,
 	        opacity: opts.opacity,
@@ -66,7 +72,7 @@
     } else {
     
 	    overlay = $('<div></div>')
-	      .addClass('overlay')
+	      .addClass(opts.overlayClass)
 	      .css({
 	        background: opts.color,
 	        opacity: opts.opacity,
@@ -209,6 +215,7 @@
    
 	$.fn.overlay.defaults = {
     color: '#000',
+	overlayClass: 'overlay',
     opacity: 0.5,
     effect: 'none',
     onShow: null,

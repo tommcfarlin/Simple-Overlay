@@ -62,4 +62,12 @@ $(function() {
       }
     });
   });
+
+  $('#photo-trigger-2').click(function() {
+    $(this).overlay({
+      overlayClass: 'ui-widget-overlay',
+      effect: 'fade',
+      container: '#photo-trigger-2'
+    });
+  });
 });
