@@ -75,6 +75,20 @@ test("container", function() {
  *-------------------------------------------------------*/
 
 module("Specific Option Values");
+test("color without class", function() {
+	function colorValue() {
+    $('#overlay-trigger').click(function() {
+      $(this).overlay({
+        overlayClass: null,
+        color: '#fff',
+        closeOnClick: true
+      });
+    });
+    $('#overlay-trigger').trigger('click');
+    return $('div:last').css('display', 'none').css('background-color');
+	}
+	equal(colorValue(), 'rgb(255, 255, 255)', 'The specified color for the overlay.');
+});
 test("color", function() {
 	function colorValue() {
     $('#overlay-trigger').click(function() {
@@ -86,7 +100,7 @@ test("color", function() {
     $('#overlay-trigger').trigger('click');
     return $('.overlay:first').css('display', 'none').css('background-color');
 	}
-	equal(colorValue(), 'rgb(255, 255, 255)', 'The specified color for the overlay.');
+	equal(colorValue(), 'rgba(0, 0, 0, 0)', 'The specified color for the overlay can not be set if class provided.');
 });
 
 test("opacity", function() {
