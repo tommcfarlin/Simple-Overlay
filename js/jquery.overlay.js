@@ -70,15 +70,19 @@
         });
 
     } else {
-
+      // All absolute positioned elements must proceed the same as body
+      var $isAbsolute = false;
+      if(opts.container.toString() === 'body' || $(opts.container).css('position') === 'absolute') {
+        $isAbsolute = true;
+      }
       overlay
         .css({
           background: opts.color,
           opacity: opts.opacity,
-          top: opts.container.toString() === 'body' ? iTop : $(opts.container).offset().top,
-          left: $(opts.container).offset().left,
-          width: opts.container === 'body' ? '100%' : $(opts.container).width(),
-          height: opts.container === 'body' ? '100%' : $(opts.container).height(),
+          top: $isAbsolute ? iTop : $(opts.container).offset().top,
+          left: $isAbsolute ? 0 : $(opts.container).offset().left,
+          width: $isAbsolute ? '100%' : $(opts.container).width(),
+          height: $isAbsolute ? '100%' : $(opts.container).height(),
           position: 'absolute',
           zIndex: opts.zIndex,
           display: 'none',
@@ -224,3 +228,4 @@
   }; // end defaults
 
 })(jQuery);
+
